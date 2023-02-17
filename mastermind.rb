@@ -25,6 +25,7 @@ class HumanPlayer
     end
 
     def inputPlayerGuess
+        puts "Time to guess!"
         @playerGuess.each_index do |index|
             print "Enter color #{index + 1} guess: "
             @playerGuess[index] = gets.chomp.downcase
@@ -36,6 +37,7 @@ class HumanPlayer
     end
 
     def inputPlayerCode
+        puts "Time to create a secret code!"
         @playerCode.each_index do |index|
             print "Enter color #{index + 1}: "
             @playerCode[index] = gets.chomp.downcase
@@ -44,6 +46,23 @@ class HumanPlayer
                 @playerCode[index] = gets.chomp.downcase
             end
         end
+    end
+
+    def checkComputerGuess(computerGuess)
+        accuracy_array = Array.new(4)
+        @playerCode.each_index do |index|
+            if(@computerCode.include?(playerGuess[index]))
+                if(@computerCode[index] == playerGuess[index])
+                    accuracy_array[index] = 2
+                else  
+                    accuracy_array[index] = 1
+                end
+            else
+                accuracy_array[index] = 0
+            end
+        end
+
+        return accuracy_array
     end
 
     def printPlayerGuess
