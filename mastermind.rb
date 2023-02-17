@@ -51,4 +51,19 @@ class ComputerPlayer
             @computerCode[index] = choose_random_color()
         end
     end
+
+    def checkGuess(playerGuess)
+        puts "Guess Information:"
+        @computerCode.each_index do |index|
+            if(@computerCode.include?(playerGuess[index]))
+                if(@computerCode[index] == playerGuess[index])
+                    puts "Color #{index + 1} is correct!"
+                else
+                    puts "Color #{index + 1} IS in the secret code. But in another place..."
+                end
+            else
+                puts "Color #{index + 1} is WRONG."
+            end
+        end
+    end
 end
