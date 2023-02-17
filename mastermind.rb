@@ -8,7 +8,13 @@ def acceptable_color?(guess)
     end
 
     return acceptable_color
-end         
+end
+
+def choose_random_color
+    colors = ["yellow", "red", "green", "white", "blue", "purple"]
+    random = rand(6)
+    return colors[random]
+end
 
 class HumanPlayer
     attr_reader :playerGuess
