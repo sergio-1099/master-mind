@@ -45,8 +45,10 @@ class ComputerPlayer
         @computerCode = Array.new(4)
         @computerGuess = Array.new(4)
     end
-end
 
-player = HumanPlayer.new
-player.inputPlayerGuess
-player.printPlayerGuess
+    def createCode
+        @computerCode.each_index do |index|
+            @computerCode[index] = choose_random_color()
+        end
+    end
+end
