@@ -1,3 +1,16 @@
+def acceptable_color?(guess)
+    colors = ["yellow", "red", "green", "white", "blue", "purple"]
+    acceptable_color = false
+    colors.each do |value|
+        if (guess.upcase == value.upcase)
+            acceptable_color = true
+        end
+    end
+
+    return acceptable_color
+end
+            
+
 class HumanPlayer
     attr_reader :playerGuess
 
