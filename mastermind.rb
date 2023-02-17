@@ -35,6 +35,17 @@ class HumanPlayer
         end
     end
 
+    def inputPlayerCode
+        @playerCode.each_index do |index|
+            print "Enter color #{index + 1}: "
+            @playerCode[index] = gets.chomp.downcase
+            until (acceptable_color?(@playerGuess[index]))
+                print "Unnaceptable color. Try again: "
+                @playerCode[index] = gets.chomp.downcase
+            end
+        end
+    end
+
     def printPlayerGuess
         puts "Player guessed: #{@playerGuess}."
     end
