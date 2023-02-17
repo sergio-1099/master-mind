@@ -8,8 +8,7 @@ def acceptable_color?(guess)
     end
 
     return acceptable_color
-end
-            
+end         
 
 class HumanPlayer
     attr_reader :playerGuess
@@ -35,6 +34,12 @@ class HumanPlayer
     end
 end
 
+class ComputerPlayer
+    def initialize
+        @computerCode = Array.new(4)
+        @computerGuess = Array.new(4)
+    end
+end
 
 player = HumanPlayer.new
 player.inputPlayerGuess
