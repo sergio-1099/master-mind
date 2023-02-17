@@ -21,8 +21,12 @@ class HumanPlayer
 
     def inputPlayerGuess
         @playerGuess.each_index do |index|
-            print "Enter color #{index} guess: "
+            print "Enter color #{index + 1} guess: "
             @playerGuess[index] = gets.chomp
+            until (acceptable_color?(@playerGuess[index]))
+                print "Unnaceptable color. Try again: "
+                @playerGuess[index] = gets.chomp
+            end
         end
     end
 end
