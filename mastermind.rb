@@ -41,7 +41,7 @@ class HumanPlayer
         @playerCode.each_index do |index|
             print "Enter color #{index + 1}: "
             @playerCode[index] = gets.chomp.downcase
-            until (acceptable_color?(@playerGuess[index]))
+            until (acceptable_color?(@playerCode[index]))
                 print "Unnaceptable color. Try again: "
                 @playerCode[index] = gets.chomp.downcase
             end
@@ -51,12 +51,8 @@ class HumanPlayer
     def checkComputerGuess(computerGuess)
         accuracy_array = Array.new(4)
         @playerCode.each_index do |index|
-            if(@computerCode.include?(playerGuess[index]))
-                if(@computerCode[index] == playerGuess[index])
-                    accuracy_array[index] = 2
-                else  
-                    accuracy_array[index] = 1
-                end
+            if(computerGuess[index] == @playerCode[index])
+                accuracy_array[index] = 1
             else
                 accuracy_array[index] = 0
             end
@@ -71,6 +67,8 @@ class HumanPlayer
 end
 
 class ComputerPlayer
+    attr_reader :computerGuess
+
     def initialize
         @computerCode = Array.new(4)
         @computerGuess = Array.new(4)
@@ -80,6 +78,17 @@ class ComputerPlayer
         @computerCode.each_index do |index|
             @computerCode[index] = choose_random_color()
         end
+    end
+
+    def createGuess(accuracy_array)
+        accuracy_array.each_index do |index|
+            if (accuracy_array[index] == 0)
+                @computerGuess[index] = choose_random_color()
+            elsif (accuracy_array[index] == 1)
+                @computerGuess[index] = @computerGuess[index]
+            end 
+        end
+        p @computerGuess
     end
 
     def checkGuess(playerGuess)
