@@ -17,41 +17,41 @@ def choose_random_color
 end
 
 class HumanPlayer
-    attr_reader :playerGuess
+    attr_reader :player_guess
 
     def initialize
-        @playerGuess = Array.new(4)
-        @playerCode = Array.new(4)
+        @player_guess = Array.new(4)
+        @player_code = Array.new(4)
     end
 
-    def inputPlayerGuess
+    def input_player_guess
         puts "Time to guess!"
-        @playerGuess.each_index do |index|
+        @player_guess.each_index do |index|
             print "Enter color #{index + 1} guess: "
-            @playerGuess[index] = gets.chomp.downcase
-            until (acceptable_color?(@playerGuess[index]))
+            @player_guess[index] = gets.chomp.downcase
+            until (acceptable_color?(@player_guess[index]))
                 print "Unnaceptable color. Try again: "
-                @playerGuess[index] = gets.chomp.downcase
+                @player_guess[index] = gets.chomp.downcase
             end
         end
     end
 
-    def inputPlayerCode
+    def input_player_code
         puts "Time to create a secret code!"
-        @playerCode.each_index do |index|
+        @player_code.each_index do |index|
             print "Enter color #{index + 1}: "
-            @playerCode[index] = gets.chomp.downcase
-            until (acceptable_color?(@playerCode[index]))
+            @player_code[index] = gets.chomp.downcase
+            until (acceptable_color?(@player_code[index]))
                 print "Unnaceptable color. Try again: "
-                @playerCode[index] = gets.chomp.downcase
+                @player_code[index] = gets.chomp.downcase
             end
         end
     end
 
-    def checkComputerGuess(computerGuess)
+    def check_computer_guess(computer_guess)
         accuracy_array = Array.new(4)
-        @playerCode.each_index do |index|
-            if(computerGuess[index] == @playerCode[index])
+        @player_code.each_index do |index|
+            if(computer_guess[index] == @player_code[index])
                 accuracy_array[index] = 1
             else
                 accuracy_array[index] = 0
@@ -61,41 +61,41 @@ class HumanPlayer
         return accuracy_array
     end
 
-    def printPlayerGuess
-        puts "Player guessed: #{@playerGuess}."
+    def print_player_guess
+        puts "Player guessed: #{@player_guess}."
     end
 end
 
 class ComputerPlayer
-    attr_reader :computerGuess
+    attr_reader :computer_guess
 
     def initialize
-        @computerCode = Array.new(4)
-        @computerGuess = Array.new(4)
+        @computer_code = Array.new(4)
+        @computer_guess = Array.new(4)
     end
 
-    def createCode
-        @computerCode.each_index do |index|
-            @computerCode[index] = choose_random_color()
+    def create_code
+        @computer_code.each_index do |index|
+            @computer_code[index] = choose_random_color()
         end
     end
 
-    def createGuess(accuracy_array)
+    def create_guess(accuracy_array)
         accuracy_array.each_index do |index|
             if (accuracy_array[index] == 0)
-                @computerGuess[index] = choose_random_color()
+                @computer_guess[index] = choose_random_color()
             elsif (accuracy_array[index] == 1)
-                @computerGuess[index] = @computerGuess[index]
+                @computer_guess[index] = @computer_guess[index]
             end 
         end
-        p @computerGuess
+        p @computer_guess
     end
 
-    def checkGuess(playerGuess)
+    def check_guess(playerGuess)
         puts "Guess Information:"
-        @computerCode.each_index do |index|
-            if(@computerCode.include?(playerGuess[index]))
-                if(@computerCode[index] == playerGuess[index])
+        @computer_code.each_index do |index|
+            if(@computer_code.include?(player_guess[index]))
+                if(@computer_code[index] == player_guess[index])
                     puts "Color #{index + 1} is correct!"
                 else
                     puts "Color #{index + 1} IS in the secret code. But in another place..."
