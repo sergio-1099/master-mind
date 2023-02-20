@@ -91,7 +91,10 @@ class ComputerPlayer
         p @computer_guess
     end
 
-    def check_guess(playerGuess)
+    def check_guess(player_guess)
+        if (@computer_code == player_guess)
+            return true
+        end
         puts "Guess Information:"
         @computer_code.each_index do |index|
             if(@computer_code.include?(player_guess[index]))
@@ -104,5 +107,35 @@ class ComputerPlayer
                 puts "Color #{index + 1} is WRONG."
             end
         end
+        return false
+    end
+end
+
+def playerGuesses
+    human = HumanPlayer.new
+    computer = ComputerPlayer.new
+
+    computer.create_code
+    puts "Computer has created a code!"
+    human.input_player_guess
+
+    until (computer.check_guess(human.player_guess))
+        human.input_player_guess
+    end
+
+    puts "Correct!"
+end
+
+def computerGuesses
+    human = HumanPlayer.new
+    computer = ComputerPlayer.new
+
+    human.input_player_code
+    puts "Player has entered code!"
+    guess = computer.create_guess([0, 0, 0, 0])
+
+    until (human.check_computer_guess(guess) == [1, 1, 1, 1])
+        guess = computer.create_guess(human.check_computer_guess(guess))
+        sleep 3
     end
 end
