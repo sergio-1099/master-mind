@@ -101,7 +101,8 @@ class ComputerPlayer
                 if(@computer_code[index] == player_guess[index])
                     puts "Color #{index + 1} is correct!"
                 else
-                    puts "Color #{index + 1} IS in the secret code. But in another place..."
+                    print "Color #{index + 1} IS in the secret code. "
+                    puts "But in another place..."
                 end
             else
                 puts "Color #{index + 1} is WRONG."
@@ -137,5 +138,23 @@ def computerGuesses
     until (human.check_computer_guess(guess) == [1, 1, 1, 1])
         guess = computer.create_guess(human.check_computer_guess(guess))
         sleep 3
+    end
+end
+
+more_games = "y"
+while (more_games == "Y" || more_games == "y")
+    print "Enter 1 if you want to be the guesser or 2 if you want to encode: "
+    game_type = gets.chomp.to_i
+    if (game_type == 1)
+        playerGuesses()
+    elsif (game_type == 2)
+        computerGuesses()
+    end
+
+    print "Do you want to play again? (Y/N): "
+    more_games = gets.chomp.downcase
+    until (more_games == "y" || more_games == "n")
+        print "Not a valid choice. Choose again: "
+        more_games = gets.chomp.downcase 
     end
 end
