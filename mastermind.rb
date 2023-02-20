@@ -25,7 +25,7 @@ class HumanPlayer
     end
 
     def input_player_guess
-        puts "Time to guess!"
+        puts "\nTime to guess!"
         @player_guess.each_index do |index|
             print "Enter color #{index + 1} guess: "
             @player_guess[index] = gets.chomp.downcase
@@ -37,7 +37,7 @@ class HumanPlayer
     end
 
     def input_player_code
-        puts "Time to create a secret code!"
+        puts "\nTime to create a secret code!"
         @player_code.each_index do |index|
             print "Enter color #{index + 1}: "
             @player_code[index] = gets.chomp.downcase
@@ -97,17 +97,17 @@ class ComputerPlayer
         if (@computer_code == player_guess)
             return true
         end
-        puts "Guess Information:"
+        puts "\nGuess Information:"
         @computer_code.each_index do |index|
             if(@computer_code.include?(player_guess[index]))
                 if(@computer_code[index] == player_guess[index])
-                    puts "Color #{index + 1} is correct!"
+                    puts "\nColor #{index + 1} is correct!"
                 else
-                    print "Color #{index + 1} IS in the secret code. "
+                    print "\nColor #{index + 1} IS in the secret code. "
                     puts "But in another place..."
                 end
             else
-                puts "Color #{index + 1} is WRONG."
+                puts "\nColor #{index + 1} is WRONG."
             end
         end
         return false
@@ -119,16 +119,17 @@ def playerGuesses
     computer = ComputerPlayer.new
 
     computer.create_code
-    puts "Computer has created a code!"
+    puts "\nComputer has created a code!"
     human.input_player_guess
     try = 1
 
     until (computer.check_guess(human.player_guess) || try == 12)
-        human.input_player_guess
         try += 1
+        puts "\nTry number: #{try}\n"
+        human.input_player_guess
     end
 
-    if (try >= 12)
+    if (try > 12)
         puts "\nYou lost!"
     else
         puts "\nCorrect!"
@@ -150,7 +151,7 @@ def computerGuesses
         sleep 1
     end
 
-    if (try >= 12)
+    if (try > 12)
         puts "\nComputer Lost! You win!"
     else
         puts "\nComputer won! You lost..."
