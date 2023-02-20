@@ -136,10 +136,18 @@ def computerGuesses
     human.input_player_code
     puts "Player has entered code!"
     guess = computer.create_guess([0, 0, 0, 0])
+    try = 1
 
-    until (human.check_computer_guess(guess) == [1, 1, 1, 1])
+    until ((human.check_computer_guess(guess) == [1, 1, 1, 1]) || try == 12)
         guess = computer.create_guess(human.check_computer_guess(guess))
-        sleep 3
+        try += 1
+        sleep 1
+    end
+
+    if (try >= 12)
+        puts "\nComputer Lost! You win!"
+    else
+        puts "\nComputer won! You lost..."
     end
 end
 
@@ -153,7 +161,7 @@ while (more_games == "Y" || more_games == "y")
         computerGuesses()
     end
 
-    print "Do you want to play again? (Y/N): "
+    print "\nDo you want to play again? (Y/N): "
     more_games = gets.chomp.downcase
     until (more_games == "y" || more_games == "n")
         print "Not a valid choice. Choose again: "
