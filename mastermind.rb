@@ -121,12 +121,18 @@ def playerGuesses
     computer.create_code
     puts "Computer has created a code!"
     human.input_player_guess
+    try = 1
 
-    until (computer.check_guess(human.player_guess))
+    until (computer.check_guess(human.player_guess) || try == 12)
         human.input_player_guess
+        try += 1
     end
 
-    puts "Correct!"
+    if (try >= 12)
+        puts "\nYou lost!"
+    else
+        puts "\nCorrect!"
+    end
 end
 
 def computerGuesses
