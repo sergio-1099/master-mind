@@ -88,7 +88,9 @@ class ComputerPlayer
                 @computer_guess[index] = @computer_guess[index]
             end 
         end
-        p @computer_guess
+        print "\nComputer guesses: #{@computer_guess[0]}, #{@computer_guess[1]},"
+        puts " #{@computer_guess[2]}, and #{@computer_guess[3]}."
+        return @computer_guess
     end
 
     def check_guess(player_guess)
